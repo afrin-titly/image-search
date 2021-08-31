@@ -6,15 +6,15 @@
              type="text" v-model="keyword">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="fetchSearchImages"> Search </button>
     </div>
-    <!-- <ul>
-      <li v-for="(item,key) in list" :key="key" >
-        <img :src="item.urls['small']" alt="">
-      </li>
-    </ul> -->
   </div>
   <div class="grid grid-cols-3 gap-4">
-    <ImageGrid :imageList="list" />
+    <ImageGrid :imageList="perPage" />
   </div>
+  <ul class="space-x-4">
+    <li v-for="i in 10" :key="i" class="inline">
+      <a class="cursor-pointer hover:text-blue-500 hover:underline" @click="perPageData(i+1)">{{i}}</a>
+      </li>
+  </ul>
 </div>
   
   
@@ -32,6 +32,7 @@ export default {
     return {
       keyword: '',
       list: [],
+      perPage: [],
     }
   },
   mounted() {
@@ -50,13 +51,22 @@ export default {
       })
     },
     fetchAllImages() {
-        this.$axios.get("https://api.unsplash.com/photos/?page=1&per_page=30",{
+      var imgs
+      for(var i=1;i<=10;i++){
+        this.$axios.get("https://api.unsplash.com/photos/?page="+i+"&per_page=30",{
         headers: { 'Authorization': "Client-ID hBg14AILvY2jH_enddDGHpX6CTdf-u9MyxwHz8BlR5k"},
         }).then(response=>{
-          this.list = response.data
+          imgs = response.data
+        }).then(img=>{
+          this.list.push(imgs)
+          console.log(img)
         }).catch(error=>{
           console.log(error)
         })
+      }
+    },
+    perPageData(i) {
+      this.perPage = this.list[i]
     }
   }
 }

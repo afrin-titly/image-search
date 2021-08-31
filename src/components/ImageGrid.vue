@@ -1,6 +1,6 @@
 <template>
     <div v-for="(item,key) in imageList" :key="key">
-      <img :src="item.urls['small']" alt="">
+        <img :src="item.urls['small']" alt="">
     </div>
 </template>
 
