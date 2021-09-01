@@ -12,7 +12,7 @@
   </div>
   <ul class="space-x-4">
     <li v-for="i in 10" :key="i" class="inline">
-      <a class="cursor-pointer hover:text-blue-500 hover:underline" @click="perPageData(i+1)">{{i}}</a>
+      <a class="cursor-pointer hover:text-red-500 hover:underline text-blue-600 visited:text-purple-600" @click="perPageData(i)">{{i}}</a>
       </li>
   </ul>
 </div>
@@ -44,7 +44,6 @@ export default {
         headers: { 'Authorization': "Client-ID hBg14AILvY2jH_enddDGHpX6CTdf-u9MyxwHz8BlR5k"},
       },
       ).then(response=>{
-        console.log(response.data)
         this.list = response.data.results
       }).catch(error=>{
         console.log(error)
@@ -58,6 +57,7 @@ export default {
         }).then(response=>{
           imgs = response.data
         }).then(img=>{
+          this.perPage = this.list[0]
           this.list.push(imgs)
           console.log(img)
         }).catch(error=>{
@@ -66,7 +66,7 @@ export default {
       }
     },
     perPageData(i) {
-      this.perPage = this.list[i]
+      this.perPage = this.list[i-1]
     }
   }
 }
