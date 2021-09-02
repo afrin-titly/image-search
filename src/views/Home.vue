@@ -10,7 +10,7 @@
   <div class="grid grid-cols-3 gap-4">
     <ImageGrid :imageList="perPage" />
   </div>
-  <ul class="space-x-4">
+  <ul class="space-x-4 ml-96">
     <li v-for="i in 10" :key="i" class="inline">
       <a class="cursor-pointer hover:text-red-500 hover:underline text-blue-600 visited:text-purple-600" @click="perPageData(i)">{{i}}</a>
       </li>
