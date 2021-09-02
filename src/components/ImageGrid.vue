@@ -1,6 +1,10 @@
 <template>
     <div v-for="(item,key) in imageList" :key="key">
-        <img :src="item.urls['small']" alt="">
+        <router-link :to="{path: '/detail/'+item.id, props: {
+            type: object,
+            default: () => ({obj: item})}}">
+            click me</router-link>
+        <img :src="item.urls['small']" alt="" >
     </div>
 </template>
 
