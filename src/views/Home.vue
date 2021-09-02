@@ -4,7 +4,7 @@
     <div class="flex border-b py-2">
       <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" 
              type="text" v-model="keyword">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="fetchSearchImages" > Search </button>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="keyword.length>0 ? fetchSearchImages():fetchAllImages()" > Search </button>
     </div>
   </div>
   <div class="grid grid-cols-3 gap-4">
@@ -43,7 +43,7 @@ export default {
       this.list = []
       var searchImgs
       for(var i=1;i<=10;i++){
-        this.$axios.get("https://api.unsplash.com/search/photos/?page="+i+"&query="+this.keyword+"&per_page=10",{
+        this.$axios.get("https://api.unsplash.com/search/photos/?page="+i+"&query="+this.keyword+"&per_page=30",{
           headers: { 'Authorization': "Client-ID hBg14AILvY2jH_enddDGHpX6CTdf-u9MyxwHz8BlR5k"},
         },
         ).then(response=>{
@@ -58,6 +58,7 @@ export default {
       }
       },
     fetchAllImages() {
+      this.list = []
       var imgs
       for(var i=1;i<=10;i++){
         this.$axios.get("https://api.unsplash.com/photos/?page="+i+"&per_page=30",{
