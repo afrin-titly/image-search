@@ -20,7 +20,7 @@ const routes = [
     path: '/detail/:id',
     name: 'DetailView',
     component: DetailView,
-    props: true
+    // props: true
   },
 ]
 
