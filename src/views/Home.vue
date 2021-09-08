@@ -17,6 +17,7 @@
           "
           type="text"
           v-model="keyword"
+          @input="keyword.length > 0 ? fetchSearchImages() : fetchAllImages()"
         />
         <button
           class="
