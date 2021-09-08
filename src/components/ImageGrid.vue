@@ -11,7 +11,7 @@
             }" >
             {{typeof(item)}}
             click me</router-link> -->
-        <router-link :to="{name: 'DetailView', 
+        <router-link v-if="item" :to="{name: 'DetailView', 
                            params:{
                                id: item.id,
                                item: JSON.stringify(item),
