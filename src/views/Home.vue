@@ -84,10 +84,11 @@ export default {
   },
   methods: {
     fetchSearchImages() {
-      this.list = [];
+      let searchedResult = []
       var searchImgs;
       for (var i = 1; i <= 10; i++) {
-        this.$axios
+        let searched = new Promise((resolve, reject)=>{
+          this.$axios
           .get(
             "https://api.unsplash.com/search/photos/?page=" +
               i +
@@ -103,19 +104,21 @@ export default {
           )
           .then((response) => {
             searchImgs = response.data.results;
-            this.list.push(searchImgs);
-            if (i == 1) {
-              this.perPage = this.list[0];
-            }
+            resolve(searchImgs)
           })
-          // .then(img=>{
-          //   this.perPage = this.list[0]
-          //   this.list.push(searchImgs)
-          //   console.log(img)
-          // })
           .catch((error) => {
             console.log(error);
+            reject(error)
           });
+        })
+        searchedResult.push(searched)
+        Promise.all(searchedResult).then(response=>{
+          this.list = response
+          this.perPage = response[0]
+        })
+        .catch(error=>{
+          console.log(error)
+        })
       }
     },
     fetchAllImages() {
@@ -137,7 +140,6 @@ export default {
               )
               .then((response) => {
                 let data = response.data;
-                console.log("inslide");
                 resolve(data);
               })
               .catch((error) => {
