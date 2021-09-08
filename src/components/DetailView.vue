@@ -1,10 +1,14 @@
 <template>
-    <div v-if="obj">
-        <h1>Details</h1>
-        <img :src="obj.urls.small">
-        <p>{{obj.desc}}</p>
-        <p>{{obj.likes}}</p>
-        <p>{{obj.created_at}}</p>
+    <div class="my-4 mx-72 justify-center" v-if="obj" >
+        <img :src="obj.urls.regular">
+        <p><b>Description:</b> {{obj.alt_description}}</p>
+        <p><b>Likes:</b> {{obj.likes}}</p>
+        <p><b>Created At:</b> {{obj.created_at}}</p>
+        <h5>User Info</h5>
+        <p><b>Full Name: </b> {{obj.user.name}} </p>
+        <p><b>User Name: </b> {{obj.user.username}} </p>
+        <p><b>User Bio: </b> {{obj.user.bio}} </p>
+        <p><b>User Name: </b> <a :href="obj.user.portfolio_url" class="hover:underline text-blue-600"> {{obj.user.portfolio_url}}</a> </p>
     </div>
 </template>
 
@@ -17,28 +21,8 @@
             }
         },
         props: ["item"],
-        computed: {
-            // imagePath: {
-            //     // return this.obj.urls['small']
-            //     get() {
-            //         return this.obj.urls['small']
-            //     },
-            //     set(value) {
-            //         this.obj.urls['small'] = value
-            //         return value
-            //     }
-            // }
-        },
         mounted() {
             this.obj = JSON.parse(this.$route.params.item)
-            
-            // if(this.obj){
-            //     let img=this.$refs.image;
-            //     img.src=this.obj.urls.small;
-            //     console.log(this.obj.urls,img)
-            // }
-            // console.log(this.obj.urls.small)
-            //this.imagePath = this.obj.urls.small
         }
     }
 </script>
