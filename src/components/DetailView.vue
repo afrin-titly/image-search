@@ -10,6 +10,7 @@
         <p><b>User Bio: </b> {{obj.user.bio}} </p>
         <p><b>User Name: </b> <a :href="obj.user.portfolio_url" class="hover:underline text-blue-600"> {{obj.user.portfolio_url}}</a> </p>
     </div>
+    <!-- {{getCurrentItem.alt_description}} -->
 </template>
 
 <script>
@@ -17,13 +18,12 @@
         data() {
             return {
                 obj:null,
-                imgpath:null,
             }
         },
         props: ["item"],
         mounted() {
-            this.obj = JSON.parse(this.$route.params.item)
-        }
+            this.obj = this.$store.getters.getCurrentItem
+        },
     }
 </script>
 
