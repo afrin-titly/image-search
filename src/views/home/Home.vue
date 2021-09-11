@@ -36,10 +36,10 @@
       </div>
     </div>
     <div class="grid grid-cols-3 gap-4">
-      <ImageGrid :imageList="perPage" v-if="perPage" />
+      <ImageGrid :imageList="getAllImages[currentPage]" v-if="getAllImages" />
     </div>
     <ul class="space-x-4 ml-96">
-      <li v-for="i in pageCnt" :key="i" class="inline">
+      <li v-for="i in pageCount" :key="i" class="inline">
         <a
           class="
             cursor-pointer
@@ -58,8 +58,8 @@
 
 <script>
 // @ is an alias to /src
-import ImageGrid from "../components/ImageGrid.vue";
-import { reactive } from "vue";
+import ImageGrid from "../../components/ImageGrid.vue";
+import {mapActions, mapGetters} from "vuex"
 export default {
   name: "Home",
   components: {
@@ -68,20 +68,18 @@ export default {
   data() {
     return {
       keyword: "",
-      list: reactive([]),
-      perPage: [],
-      test: [],
-      pageCnt:10,
+      pageCount: 0,
+      currentPage: 0
     };
   },
   mounted() {
-    this.fetchAllImages().then((r) => {
-      this.perPage = r[0];
-      this.list=r;
-      this.pageCnt=r.length;
-    }).catch(err=>{
-      console.log(err)
-    });
+    this.fetchAllImages().then(response=>{
+      this.pageCount = this.getAllImages.length
+      console.log(response)
+    })
+  },
+  computed: {
+    ...mapGetters(["getAllImages"])
   },
   methods: {
     fetchSearchImages() {
@@ -116,37 +114,10 @@ export default {
         })
       }
     },
-    fetchAllImages() {
-      return new Promise((resolve1, reject1) => {
-        this.list = [];
-        //let lst=[];
-        let proms = [];
-        for (var i = 1; i <= 5; i++) {
-          let prom = new Promise((resolve, reject) => {
-            this.$axios
-              .get(
-                "https://api.unsplash.com/photos/?page=" + i + "&per_page=30",
-              )
-              .then((response) => {
-                let data = response.data;
-                resolve(data);
-              })
-              .catch((error) => {
-                console.log(error);
-                reject(error);
-              });
-          });
-          proms.push(prom);
-        }
-        Promise.all(proms).then((r) => {
-          resolve1(r);
-        }).catch(error =>{
-          reject1(error)
-        });
-      });
-    },
+    ...mapActions(["fetchAllImages"]),
+
     perPageData(i) {
-      this.perPage = this.list[i - 1];
+      this.currentPage = i - 1;
     },
   },
 };

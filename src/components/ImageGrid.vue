@@ -1,9 +1,9 @@
 <template>
     <div v-for="(item,key) in imageList" :key="key" >
-        <router-link @click="setItem(item)" v-if="item" :to="{name: 'DetailView', 
-                           params:{ id: item.id,}  }"> 
+        <!-- <router-link @click="setItem(item)" v-if="item" :to="{name: 'DetailView', 
+                           params:{ id: item.id,}  }">  -->
             <img :src="item.urls['small']" alt="" >
-        </router-link>
+        <!-- </router-link> -->
         
     </div>
 </template>

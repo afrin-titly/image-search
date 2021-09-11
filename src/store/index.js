@@ -1,21 +1,27 @@
 import { createStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+import images from '../store/module/home.js'
+
+// const store = createStore({
+//     state: {
+//       currentItem: {}
+//     },
+//     getters: {
+//         getCurrentItem(state){
+//             return state.currentItem
+//         }
+//     },
+//     mutations: {
+//       setCurrentObject(state, payload){
+//         state.currentItem = payload
+//       }
+//     },
+//     plugins: [createPersistedState()]
+// })
 
 const store = createStore({
-    state: {
-      currentItem: {}
-    },
-    getters: {
-        getCurrentItem(state){
-            return state.currentItem
-        }
-    },
-    mutations: {
-      setCurrentObject(state, payload){
-        state.currentItem = payload
-      }
-    },
-    plugins: [createPersistedState()]
+  modules: {
+    images
+  }
 })
 
 export default store
