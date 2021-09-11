@@ -96,12 +96,6 @@ export default {
               "&query=" +
               this.keyword +
               "&per_page=30",
-            {
-              headers: {
-                Authorization:
-                  "Client-ID hBg14AILvY2jH_enddDGHpX6CTdf-u9MyxwHz8BlR5k",
-              },
-            }
           )
           .then((response) => {
             searchImgs = response.data.results;
@@ -132,12 +126,6 @@ export default {
             this.$axios
               .get(
                 "https://api.unsplash.com/photos/?page=" + i + "&per_page=30",
-                {
-                  headers: {
-                    Authorization:
-                      "Client-ID hBg14AILvY2jH_enddDGHpX6CTdf-u9MyxwHz8BlR5k",
-                  },
-                }
               )
               .then((response) => {
                 let data = response.data;
