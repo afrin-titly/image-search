@@ -17,7 +17,6 @@
           "
           type="text"
           v-model="keyword"
-          @input="keyword.length > 0 ? fetchSearchImages() : fetchAllImages()"
         />
         <button
           class="
@@ -29,8 +28,8 @@
             px-4
             rounded
           "
-          @click="keyword.length > 0 ? fetchSearchImages() : fetchAllImages()"
-        >
+          @click="fetchAllImages(keyword)"  
+        > 
           Search
         </button>
       </div>
@@ -73,7 +72,7 @@ export default {
     };
   },
   mounted() {
-    this.fetchAllImages().then(response=>{
+    this.fetchAllImages(this.keyword).then(response=>{
       this.pageCount = this.getAllImages.length
       console.log(response)
     })
@@ -82,38 +81,6 @@ export default {
     ...mapGetters(["getAllImages"])
   },
   methods: {
-    fetchSearchImages() {
-      let searchedResult = []
-      var searchImgs;
-      for (var i = 1; i <= 10; i++) {
-        let searched = new Promise((resolve, reject)=>{
-          this.$axios
-          .get(
-            "https://api.unsplash.com/search/photos/?page=" +
-              i +
-              "&query=" +
-              this.keyword +
-              "&per_page=30",
-          )
-          .then((response) => {
-            searchImgs = response.data.results;
-            resolve(searchImgs)
-          })
-          .catch((error) => {
-            console.log(error);
-            reject(error)
-          });
-        })
-        searchedResult.push(searched)
-        Promise.all(searchedResult).then(response=>{
-          this.list = response
-          this.perPage = response[0]
-        })
-        .catch(error=>{
-          console.log(error)
-        })
-      }
-    },
     ...mapActions(["fetchAllImages"]),
 
     perPageData(i) {

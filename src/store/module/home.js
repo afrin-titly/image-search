@@ -14,14 +14,25 @@ const images = {
         }
     },
     actions: {
-        fetchAllImages({commit}) {
+        fetchAllImages({commit}, keyword) {
            let images = []
+           let url = ""
+           console.log(keyword)
            return new Promise((resolve1)=>{  
             for(let i=1; i<=5; i++){
+                if(keyword.length > 0){
+                    url = "https://api.unsplash.com/search/photos/?page=" + i +"&query=" + keyword + "&per_page=30"
+                }else {
+                    url = "https://api.unsplash.com/photos/?page=" + i + "&per_page=30"
+                }
                 let imgs = new Promise((resolve, reject)=>{
-                axios.get("https://api.unsplash.com/photos/?page=" + i + "&per_page=30",)
+                axios.get(url)
                 .then((response)=>{
-                 resolve(response.data)
+                    if(keyword.length > 0){
+                        resolve(response.data.results)
+                    }else{
+                        resolve(response.data)
+                    }
                 })
                 .catch((error)=>{
                     reject(error)
@@ -37,7 +48,7 @@ const images = {
                 resolve1(response)
             })
            })
-        }
+        },
     }
 }
 export default images
