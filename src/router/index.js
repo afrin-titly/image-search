@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '../views/layout/Layout.vue'
 import About from '../views/about/About.vue'
 import Home from '../views/home/Home.vue'
+import DetailView from '../components/DetailView.vue'
 
 const routes = [
   // {
@@ -36,6 +37,11 @@ const routes = [
       {
         path: "",
         component: Home
+      },
+      {
+        path: "/image/:id",
+        component: DetailView,
+        name: "DetailView"
       }
     ]
   }

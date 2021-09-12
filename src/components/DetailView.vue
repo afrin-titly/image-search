@@ -10,19 +10,23 @@
         <p><b>User Bio: </b> {{obj.user.bio}} </p>
         <p><b>User Name: </b> <a :href="obj.user.portfolio_url" class="hover:underline text-blue-600"> {{obj.user.portfolio_url}}</a> </p>
     </div>
-    <!-- {{getCurrentItem.alt_description}} -->
 </template>
 
 <script>
+    import {mapActions} from "vuex"
     export default {
         data() {
             return {
-                obj:null,
+                obj: null
             }
         },
-        props: ["item"],
-        mounted() {
-            this.obj = this.$store.getters.getCurrentItem
+        methods: {
+            ...mapActions(["findSingleImage"])
+        },
+        mounted(){
+            this.findSingleImage(this.$route.params.id).then(response=>{
+                this.obj = response
+            })
         },
     }
 </script>
