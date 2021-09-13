@@ -1,25 +1,25 @@
 <template>
-  <div class="container mx-auto">
-    <SearchBar @keyword="fetchAllImages($event)" />
-    <div class="grid grid-cols-3 gap-4">
-      <ImageGrid :imageList="getAllImages[currentPage]" v-if="getAllImages" />
+    <div class="container mx-auto mr-4">
+      <SearchBar @keyword="fetchAllImages($event)" />
+      <div class="grid grid-cols-3 gap-4">
+        <ImageGrid :imageList="getAllImages[currentPage]" v-if="getAllImages" />
+      </div>
+      <ul class="space-x-4 ml-96">
+        <li v-for="i in pageCount" :key="i" class="inline">
+          <a
+            class="
+              cursor-pointer
+              hover:text-red-500
+              hover:underline
+              text-blue-600
+              visited:text-purple-600
+            "
+            @click="perPageData(i)"
+            >{{ i }}</a
+          >
+        </li>
+      </ul>
     </div>
-    <ul class="space-x-4 ml-96">
-      <li v-for="i in pageCount" :key="i" class="inline">
-        <a
-          class="
-            cursor-pointer
-            hover:text-red-500
-            hover:underline
-            text-blue-600
-            visited:text-purple-600
-          "
-          @click="perPageData(i)"
-          >{{ i }}</a
-        >
-      </li>
-    </ul>
-  </div>
 </template>
 
 <script>
