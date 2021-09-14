@@ -1,5 +1,5 @@
 <template>
-    <div class="my-4 mx-72 justify-center" v-if="obj" >
+    <div class="my-4 mx-72 w-3/4" v-if="obj" >
         <img :src="obj.urls.regular">
         <p><b>Description:</b> {{obj.alt_description}}</p>
         <p><b>Likes:</b> {{obj.likes}}</p>
@@ -21,12 +21,17 @@
             }
         },
         methods: {
-            ...mapActions(["findSingleImage"])
+            ...mapActions({
+                findSingleImage: "findSingleImage",
+                setRecentImages: "layout/setRecentImages"
+            }),
+                 
         },
         mounted(){
             this.findSingleImage(this.$route.params.id).then(response=>{
                 this.obj = response
-            })
+                this.setRecentImages(response)
+            }) 
         },
     }
 </script>

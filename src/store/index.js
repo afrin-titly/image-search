@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import images from '../store/module/home.js'
+import layout from '../store/module/layout.js'
 
 // const store = createStore({
 //     state: {
@@ -20,7 +21,8 @@ import images from '../store/module/home.js'
 
 const store = createStore({
   modules: {
-    images
+    images,
+    layout
   }
 })
 
