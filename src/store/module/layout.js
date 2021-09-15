@@ -17,8 +17,17 @@ const recents = {
         }
     },
     actions: {
-        setRecentImages: ({commit}, payload)=> {
-            commit('setRecentImages', payload)
+        setRecentImages: ({commit, state}, payload)=> {
+            if(state.recentImages.length > 0){
+                let i = state.recentImages.filter(image=>{
+                    return image.id == payload.id
+                })
+                if(i.length == 0){
+                    commit('setRecentImages', payload)
+                }
+            }else {
+                commit('setRecentImages', payload)
+            }
         }
     },
     getters:  {
