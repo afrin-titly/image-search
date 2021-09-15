@@ -4,6 +4,7 @@ import router from './router'
 import axios from './plugins/axios_plugin';
 import './styles/tailwind.css';
 import store from './store/index'
+import './permission.js'
 
 const app = createApp(App)
 // axios.defaults.headers.common['Authorization'] = "Client-ID hBg14AILvY2jH_enddDGHpX6CTdf-u9MyxwHz8BlR5k"
