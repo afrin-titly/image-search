@@ -13,31 +13,27 @@
 </template>
 
 <script>
-    import {mapActions} from "vuex"
+    import {mapActions, mapGetters} from "vuex"
     export default {
         data() {
             return {
                 obj: null
             }
         },
+        mounted() {
+            let id = this.$route.params.id
+            if(id) {
+                this.obj = this.getAllImages.find(image=> image.id == id )
+            }
+        },
+        computed: {
+            ...mapGetters(["getAllImages"])
+        },
         methods: {
             ...mapActions({
-                findSingleImage: "findSingleImage",
                 setRecentImages: "layout/setRecentImages"
             }),
         },
-        mounted(){
-            this.findSingleImage(this.$route.params.id).then(response=>{
-                this.obj = response
-                this.setRecentImages(response)
-            }) 
-        },
-        updated() {
-            this.findSingleImage(this.$route.params.id).then(response=>{
-                this.obj = response
-                this.setRecentImages(response)
-            })
-        }
     }
 </script>
 
