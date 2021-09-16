@@ -25,7 +25,6 @@
                 findSingleImage: "findSingleImage",
                 setRecentImages: "layout/setRecentImages"
             }),
-                 
         },
         mounted(){
             this.findSingleImage(this.$route.params.id).then(response=>{
@@ -33,6 +32,12 @@
                 this.setRecentImages(response)
             }) 
         },
+        updated() {
+            this.findSingleImage(this.$route.params.id).then(response=>{
+                this.obj = response
+                this.setRecentImages(response)
+            })
+        }
     }
 </script>
 

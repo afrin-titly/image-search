@@ -52,15 +52,12 @@ const images = {
         },
         findSingleImage({state}, id) {
             let image
-            return new Promise((resolve, reject)=>{
+            return new Promise((resolve)=>{
                 for(let i=0;i<state.allImages.length;i++){
                     image = state.allImages[i].filter(image=>{
                         if(image.id == id){
                             resolve(image)
                         }
-                    })
-                    .catch((error)=>{
-                        reject(error)
                     })
                     if(image.length == 1){
                         break

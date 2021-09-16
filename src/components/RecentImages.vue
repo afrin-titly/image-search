@@ -3,7 +3,10 @@
         <h3 class="justify-center"> Recently viewed </h3>
         <ul >
             <li v-for="image in getRecentImages" :key="image.id" class="pb-2">
-                <img :src="image.urls.thumb">
+                <router-link :to="{name: 'DetailView', 
+                           params:{ id: image.id,}  }">
+                        <img :src="image.urls.thumb" alt="" >
+                </router-link>
             </li>
         </ul>
     </div>
