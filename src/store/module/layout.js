@@ -2,17 +2,22 @@
 const recents = {
     namespaced: true,
     state: {
-        max: 3,
+        max: 5,
         recentImages: []
     },
     mutations: {
-        setRecentImages: (state, payload)=> {
-            if(state.recentImages.length<state.max){
+        setRecentImages: (state, {payload, pos})=> {
+            if(pos == true) {
+                state.recentImages.splice(state.recentImages.findIndex(a => a.id === payload.id) , 1)
                 state.recentImages.push(payload)
-            } 
-            else {
-                state.recentImages.shift()
-                state.recentImages.push(payload)
+            }else {
+                if(state.recentImages.length<state.max){
+                    state.recentImages.push(payload)
+                } 
+                else {
+                    state.recentImages.shift()
+                    state.recentImages.push(payload)
+                }
             }
         }
     },
@@ -23,10 +28,12 @@ const recents = {
                     return image.id == payload.id
                 })
                 if(i.length == 0){
-                    commit('setRecentImages', payload)
+                    commit('setRecentImages', {payload: payload, pos: false})
+                } else {
+                    commit('setRecentImages', {payload: payload, pos: true})
                 }
             }else {
-                commit('setRecentImages', payload)
+                commit('setRecentImages', {payload: payload, pos: false})
             }
         }
     },
