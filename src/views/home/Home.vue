@@ -51,9 +51,13 @@ export default {
 
     perPageData(i) {
       this.currentPage = i ;
-      this.fetchAllImages(i).then(()=>{
+      if(this.keyword.length > 0){
+        this.fetchSearchImages({keyword: this.keyword, index: this.currentPage})
+      } else {
+        this.fetchAllImages(i).then(()=>{
         // add loader code here
       })
+      }
     },
     setKeyword(keyword) {
       this.keyword = keyword
