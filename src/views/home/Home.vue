@@ -1,8 +1,8 @@
 <template>
     <div class="container mx-auto mr-4">
-      <SearchBar @keyword="fetchAllImages({keyword: $event,index: currentPage})" />
+      <SearchBar @keyword="setKeyword" />
       <div class="grid grid-cols-3 gap-4">
-        <ImageGrid :imageList="getAllImages" v-if="getAllImages" />
+        <ImageGrid :imageList="keyword.length > 0 ? getSearchedImages : getAllImages" v-if="getAllImages || getSearchedImages" />
       </div>
       <ul class="space-x-4 ml-96">
         <li v-for="i in pageCount" :key="i" class="inline">
@@ -44,17 +44,21 @@ export default {
     this.perPageData(1)
   },
   computed: {
-    ...mapGetters(["getAllImages"])
+    ...mapGetters(["getAllImages", "getSearchedImages"])
   },
   methods: {
-    ...mapActions(["fetchAllImages"]),
+    ...mapActions(["fetchAllImages", "fetchSearchImages"]),
 
     perPageData(i) {
       this.currentPage = i ;
-      this.fetchAllImages({keyword:this.keyword, index:i}).then(()=>{
+      this.fetchAllImages(i).then(()=>{
         // add loader code here
       })
     },
+    setKeyword(keyword) {
+      this.keyword = keyword
+      this.fetchSearchImages({keyword: keyword,index: this.currentPage})
+    }
   },
 };
 </script>

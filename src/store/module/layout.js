@@ -23,10 +23,9 @@ const recents = {
     },
     actions: {
         setRecentImages: ({commit, state}, payload)=> {
+            console.log(payload)
             if(state.recentImages.length > 0){
-                let i = state.recentImages.filter(image=>{
-                    return image.id == payload.id
-                })
+                let i = state.recentImages.filter(image=> image.id == payload.id)
                 if(i.length == 0){
                     commit('setRecentImages', {payload: payload, pos: false})
                 } else {

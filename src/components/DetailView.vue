@@ -23,11 +23,26 @@
         mounted() {
             let id = this.$route.params.id
             if(id) {
-                this.obj = this.getAllImages.find(image=> image.id == id )
+                let img = this.getAllImages.find(image=> image.id == id )
+                let search = this.getSearchedImages.find(image=>image.id == id)
+                
+                if(img) {
+                    this.obj = img
+                } else if (search) {
+                    this.obj = search
+                } else {
+                    this.obj = this.getRecentImages.find(image=> image.id == id)
+                }
+                console.log("mounted= "+this.obj)
+                this.setRecentImages(this.obj)
             }
         },
         computed: {
-            ...mapGetters(["getAllImages"])
+            ...mapGetters({
+                getAllImages: "getAllImages",
+                getSearchedImages: "getSearchedImages",
+                getRecentImages: "layout/getRecentImages"
+            })
         },
         methods: {
             ...mapActions({
