@@ -4,7 +4,8 @@
         <div class="mb-2 sm:mb-0 m-auto">
             <!-- <a href="/home" class="text-2xl no-underline text-grey-darkest hover:text-blue-dark">Home</a> -->
             <router-link to="/" class="text-2xl no-underline text-purple-700 hover:text-white mr-4">Home</router-link> 
-            <router-link to="/about" class="text-2xl no-underline text-purple-700 hover:text-white" >About</router-link>
+            <router-link to="/about" class="text-2xl no-underline text-purple-700 hover:text-white mr-4" >About</router-link>
+            <router-link to="/testauth" class="text-2xl no-underline text-purple-700 hover:text-white mr-4" >Auth</router-link>
         </div>
     </nav>
 </template>
