@@ -7,6 +7,7 @@ import Home from '../views/home/Home.vue'
 import DetailView from '../components/DetailView.vue'
 import Auth from '../views/testauth/Auth.vue'
 import Errors from '../views/Error.vue'
+import Login from '../views/login/Login.vue'
 
 const routes = [
   // {
@@ -59,6 +60,11 @@ const routes = [
       }
     ],
   },
+  {
+    path: "/login",
+    component: Login,
+    name: "login"
+  }
 ]
 
 const router = createRouter({
