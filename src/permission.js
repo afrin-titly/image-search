@@ -10,6 +10,9 @@ router.beforeEach((to, from, next)=>{
         else if(to.name == "auth" && store.state.userType == "normal"){
             next({name: "error"})
         }
+        else if(to.name == "logout") {
+            next({name: "login"})
+        }
         else {
             next()
         }
@@ -17,7 +20,8 @@ router.beforeEach((to, from, next)=>{
     else {
         if(to.name != "login" && !store.state.isLoggedIn){
             next({name: "login"})
-        } else next()
+        } 
+        else next()
     }
     
 })

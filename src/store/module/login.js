@@ -9,10 +9,14 @@ const login = {
             if(payload == "normal") {
                 state.userType = "normal"
                 state.isLoggedIn = true
-            } else {
+            } else if(payload == "admin") {
                 state.userType = "admin"
                 state.isLoggedIn = true
             }
+        },
+        afterLogout(state) {
+            state.userType = ""
+            state.isLoggedIn = false
         }
     },
     actions: {
@@ -30,6 +34,9 @@ const login = {
                 }
             })
             
+        },
+        logout({commit}) {
+            commit('afterLogout', 'undefined')
         }
     }, 
     getters: {
