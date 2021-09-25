@@ -7,12 +7,16 @@
             <router-link to="/about" class="text-2xl no-underline text-purple-700 hover:text-white mr-4" >About</router-link>
             <router-link to="/testauth" class="text-2xl no-underline text-purple-700 hover:text-white mr-4" >Auth</router-link>
         </div>
+        <p class="text-white">Hello {{getUserType}} user!!</p>
     </nav>
 </template>
 
 <script>
+    import {mapGetters} from "vuex"
     export default {
-        
+        computed: {
+            ...mapGetters(["getUserType"])
+        }
     }
 </script>
 
