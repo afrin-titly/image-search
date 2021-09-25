@@ -3,7 +3,7 @@
         <Navbar />
         <div class="flex">
             <RecentImages />
-            <router-view :key="$route.path"></router-view>
+            <router-view :key="$route.fullPath"></router-view>
         </div>
         <Footer />
     </div>

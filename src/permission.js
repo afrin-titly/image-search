@@ -1,10 +1,27 @@
 import router from "./router/index.js"
+import store from "./store/module/login.js"
 
 router.beforeEach((to, from, next)=>{
-    if(to.name == "Auth"){
-        next({name: "error"})
-    }
+
+    if (store.state.isLoggedIn) {
+        if(to.name == "login"){
+            next()
+        } 
+        else if(to.name == "auth" && store.state.userType == "normal"){
+            next({name: "error"})
+        }
+        else if(to.name == "logout") {
+            next({name: "login"})
+        }
+        else {
+            next()
+        }
+    } 
     else {
-        next()
+        if(to.name != "login" && !store.state.isLoggedIn){
+            next({name: "login"})
+        } 
+        else next()
     }
+    
 })
