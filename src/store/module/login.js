@@ -1,3 +1,4 @@
+
 const login = {
     state: {
         userType: "",
@@ -16,13 +17,19 @@ const login = {
     },
     actions: {
         submitLoginForm({commit}, {username, password}) {
-            if(username == 'user' && password == 'secret') {
-                commit('changeLoginStatus', 'normal')
-            } else if (username == 'admin' && password == 'secret123') {
-                commit('changeLoginStatus', 'admin')
-            } else {
-                commit('changeLoginStatus', 'undefined')
-            }
+            return new Promise((resolve)=>{
+                if(username == 'user' && password == 'secret') {
+                    commit('changeLoginStatus', 'normal')
+                    resolve(true)
+                } else if (username == 'admin' && password == 'secret123') {
+                    commit('changeLoginStatus', 'admin')
+                    resolve(true)
+                } else {
+                    commit('changeLoginStatus', 'undefined')
+                    resolve(false)
+                }
+            })
+            
         }
     }, 
     getters: {

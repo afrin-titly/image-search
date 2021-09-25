@@ -30,6 +30,7 @@
 
 <script>
     import { mapActions } from 'vuex'
+    import router from '../router/index.js'
     export default {
         data() {
             return {
@@ -41,8 +42,9 @@
             ...mapActions(["submitLoginForm"]),
 
             loginSubmit() {
-                console.log("here--")
-                this.submitLoginForm({username: this.username, password: this.password})
+                this.submitLoginForm({username: this.username, password: this.password}).then(()=>{
+                  router.push({path: "/"})
+                })
             }
         }
     }
