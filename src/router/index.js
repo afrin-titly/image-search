@@ -51,7 +51,7 @@ const routes = [
       {
         path: "/testauth",
         component: Auth,
-        name: "Auth"
+        name: "auth"
       },
       {
         path: "error",

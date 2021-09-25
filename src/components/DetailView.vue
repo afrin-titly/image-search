@@ -4,11 +4,13 @@
         <p><b>Description:</b> {{obj.alt_description}}</p>
         <p><b>Likes:</b> {{obj.likes}}</p>
         <p><b>Created At:</b> {{obj.created_at}}</p>
-        <h5>User Info</h5>
-        <p><b>Full Name: </b> {{obj.user.name}} </p>
-        <p><b>User Name: </b> {{obj.user.username}} </p>
-        <p><b>User Bio: </b> {{obj.user.bio}} </p>
-        <p><b>User Name: </b> <a :href="obj.user.portfolio_url" class="hover:underline text-blue-600"> {{obj.user.portfolio_url}}</a> </p>
+        <div v-if="getUserType == 'admin'">
+            <h4>User Info</h4>
+            <p><b>Full Name: </b> {{obj.user.name}} </p>
+            <p><b>User Name: </b> {{obj.user.username}} </p>
+            <p><b>User Bio: </b> {{obj.user.bio}} </p>
+            <p><b>Portfolio URL: </b> <a :href="obj.user.portfolio_url" class="hover:underline text-blue-600"> {{obj.user.portfolio_url}}</a> </p>
+        </div>
     </div>
 </template>
 
@@ -41,7 +43,8 @@
             ...mapGetters({
                 getAllImages: "getAllImages",
                 getSearchedImages: "getSearchedImages",
-                getRecentImages: "layout/getRecentImages"
+                getRecentImages: "layout/getRecentImages",
+                getUserType: "login/getUserType"
             })
         },
         methods: {

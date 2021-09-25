@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1> I don't wanna show this page.</h1>
+        <h1> 
+            You are seeing this page cause you are admin :)
+        </h1>
     </div>
 </template>
 
